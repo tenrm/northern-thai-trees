@@ -11,20 +11,20 @@
 <style>
 :root{
   --bg:#f6f3ea; --panel:#fffdf7; --ink:#1f2a20; --muted:#5e6a5c; --line:#ddd6c4;
-  --brand:#2f5d3a; --brand-2:#477a4f; --accent:#b5651d; --chip:#e9efe2; --chip-ink:#2f5d3a;
+  --brand:#2f5d3a; --brand-2:#477a4f; --accent:#b5651d; --chip:#e9efe2; --chip-ink:#2f5d3a; --fl:#D9711A; --fr:#8A4B14;
   --shadow:0 1px 2px rgba(30,40,25,.06),0 4px 14px rgba(30,40,25,.06);
   --radius:12px;
 }
 @media (prefers-color-scheme: dark){
   :root:not([data-theme="light"]){
     --bg:#141a15; --panel:#1c241d; --ink:#e7eadf; --muted:#9fab9b; --line:#334034;
-    --brand:#8fc49a; --brand-2:#a8d4b0; --accent:#e0a060; --chip:#253328; --chip-ink:#b9dcbf;
+    --brand:#8fc49a; --brand-2:#a8d4b0; --accent:#e0a060; --chip:#253328; --chip-ink:#b9dcbf; --fl:#D9711A; --fr:#9A4F2E;
     --shadow:0 1px 2px rgba(0,0,0,.3),0 4px 14px rgba(0,0,0,.25);
   }
 }
 :root[data-theme="dark"]{
   --bg:#141a15; --panel:#1c241d; --ink:#e7eadf; --muted:#9fab9b; --line:#334034;
-  --brand:#8fc49a; --brand-2:#a8d4b0; --accent:#e0a060; --chip:#253328; --chip-ink:#b9dcbf;
+  --brand:#8fc49a; --brand-2:#a8d4b0; --accent:#e0a060; --chip:#253328; --chip-ink:#b9dcbf; --fl:#D9711A; --fr:#9A4F2E;
   --shadow:0 1px 2px rgba(0,0,0,.3),0 4px 14px rgba(0,0,0,.25);
 }
 *{box-sizing:border-box}
@@ -118,6 +118,38 @@ h2{font-size:22px}
 .toolbar{display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin-bottom:14px}
 .toolbar label{display:flex;gap:6px;align-items:center;font-size:14.5px;color:var(--muted)}
 mark{background:#f3d27a;color:inherit;border-radius:3px;padding:0 1px}
+
+/* phenology */
+.pbar{position:relative;height:16px;border-radius:4px;background-color:var(--bg);box-shadow:inset 0 0 0 1px var(--line);overflow:hidden}
+.pbar .bg{position:absolute;inset:0}
+.pbar .grid{position:absolute;inset:0;display:grid;grid-template-columns:repeat(12,1fr)}
+.pbar .grid i{border-right:1px solid color-mix(in srgb,var(--line) 70%,transparent)}
+.pbar .grid i:last-child{border-right:0}
+.pbar.big{height:26px}
+.months{display:grid;grid-template-columns:repeat(12,1fr);font-size:12px;color:var(--muted);text-align:center}
+.ptable{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow)}
+.prow{display:grid;grid-template-columns:minmax(150px,300px) minmax(0,1fr);gap:14px;align-items:center;padding:5px 14px;border-bottom:1px solid var(--line);color:var(--ink);text-decoration:none!important}
+.prow:last-child{border-bottom:0}
+.prow:hover{background:var(--bg)}
+.prow .nm{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:14.5px}
+.prow .nm .sci{font-size:13px;color:var(--muted)}
+.prow.head{position:sticky;top:var(--hh,108px);background:var(--panel);z-index:4;border-radius:var(--radius) var(--radius) 0 0;padding-top:8px;padding-bottom:6px}
+.legend{display:flex;flex-wrap:wrap;gap:6px 16px;align-items:center;font-size:13.5px;color:var(--muted);margin:6px 0 12px}
+.legend .sw{display:inline-block;width:22px;height:12px;border-radius:3px;vertical-align:-1px;margin-right:5px;box-shadow:inset 0 0 0 1px var(--line)}
+.ctl{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin:0 0 12px}
+.ctl select,.ctl input[type=text]{font:inherit;font-size:14.5px;padding:5px 10px;border:1px solid var(--line);border-radius:8px;background:var(--panel);color:var(--ink)}
+.mpick{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:6px;margin:8px 0 14px}
+.mpick button{font:inherit;font-size:14px;padding:8px 0;border:1px solid var(--line);border-radius:8px;background:var(--panel);color:var(--ink);cursor:pointer}
+.mpick button.on{background:var(--brand);border-color:var(--brand);color:var(--panel);font-weight:600}
+.seg{display:inline-flex;flex-wrap:wrap;border:1px solid var(--line);border-radius:18px;overflow:hidden}
+.seg button{white-space:nowrap;font:inherit;font-size:14px;border:0;background:var(--panel);color:var(--ink);padding:6px 14px;cursor:pointer}
+.seg button.on{background:var(--brand);color:var(--panel)}
+.mchart{display:grid;grid-template-columns:repeat(12,1fr);gap:4px;align-items:end;height:150px;padding:0 2px;border-bottom:1px solid var(--line)}
+.mchart .mc{display:flex;gap:2px;align-items:flex-end;height:100%;cursor:pointer;justify-content:center;padding:0 2px}
+.mchart .mc:hover{background:var(--bg)}
+.mchart .b{flex:1;max-width:18px;border-radius:4px 4px 0 0;min-height:1px}
+.tip{position:fixed;z-index:200;pointer-events:none;background:var(--panel);color:var(--ink);border:1px solid var(--line);box-shadow:var(--shadow);border-radius:8px;padding:6px 10px;font-size:13px;display:none;max-width:260px}
+@media (max-width:820px){.prow{grid-template-columns:1fr;gap:3px}.prow.head .nm{display:none}.mpick{grid-template-columns:repeat(6,1fr)}}
 footer{max-width:1180px;margin:0 auto;padding:20px 16px 40px;color:var(--muted);font-size:13px;border-top:1px solid var(--line)}
 @media (max-width:820px){
   .hero{grid-template-columns:1fr}
@@ -150,6 +182,8 @@ footer{max-width:1180px;margin:0 auto;padding:20px 16px 40px;color:var(--muted);
     <a href="#/idx/sci" data-t="sci">Scientific names</a>
     <a href="#/idx/en" data-t="en">English names</a>
     <a href="#/fam" data-t="fam">วงศ์ (Families)</a>
+    <a href="#/phen" data-t="phen">ปฏิทินดอก-ผล</a>
+    <a href="#/season" data-t="season">ค้นหาตามช่วงเวลา</a>
     <a href="#/page/16" data-t="page">หน้าหนังสือ</a>
     <a href="#/about" data-t="about">เกี่ยวกับ</a>
   </nav>
@@ -159,6 +193,7 @@ footer{max-width:1180px;margin:0 auto;padding:20px 16px 40px;color:var(--muted);
   ดัดแปลงเป็นฉบับออนไลน์จากหนังสือ <b>ต้นไม้เมืองเหนือ: คู่มือศึกษาพรรณไม้ยืนต้นในป่าภาคเหนือ ประเทศไทย</b> โดย ไซมอน การ์ดเนอร์, พินดา สิทธิสุนทร และวิไลวรรณ อนุสารสุนทร ·
   ลิขสิทธิ์เนื้อหาและภาพเป็นของผู้แต่งและผู้จัดพิมพ์ · ข้อความคำบรรยายได้จากการอ่านอักขระอัตโนมัติ (OCR) อาจคลาดเคลื่อน โปรดตรวจกับหน้าต้นฉบับ
 </footer>
+<div class="tip" id="tip"></div>
 <div class="lb" id="lb" role="dialog" aria-modal="true">
   <button class="x" aria-label="ปิด">×</button><button class="pv" aria-label="ก่อนหน้า">‹</button><button class="nx" aria-label="ถัดไป">›</button>
   <img id="lbimg" alt=""><div class="cap" id="lbcap"></div>
@@ -228,6 +263,8 @@ function viewHome(){
     <a href="#/idx/sci"><b>Scientific names</b>ชื่อวิทยาศาสตร์และชื่อพ้อง A–Z</a>
     <a href="#/idx/en"><b>English names</b>ชื่อสามัญภาษาอังกฤษ A–Z</a>
     <a href="#/fam"><b>วงศ์ (Families)</b>${D.fams.length} วงศ์ เรียงตามระบบในหนังสือ</a>
+    <a href="#/phen"><b>ปฏิทินดอก-ผล</b>ช่วงออกดอกและออกผลรายชนิด</a>
+    <a href="#/season"><b>ค้นหาตามช่วงเวลา</b>เดือนนี้มีต้นไม้อะไรออกดอก/ผล</a>
     <a href="#/page/16"><b>หน้าหนังสือ</b>เปิดอ่านหน้าต้นฉบับ รูปวิธาน และตาราง</a>
   </div>
   <h2 style="margin-top:26px">ตัวอย่างพรรณไม้</h2>
@@ -332,6 +369,7 @@ function viewSp(n){
       ${s.p?`<a href="#/page/${s.p}"><img src="${pageImg(s.p)}" alt="หน้าต้นฉบับ" loading="lazy" style="width:100%;margin-top:12px;border:1px solid var(--line);border-radius:8px;background:#fff"></a>`:''}
     </div>
     <div>
+      ${phenBox(s)}
       <div class="box"><h3>คำบรรยาย</h3>${s.d?`<div class="desc">${esc(s.d)}</div><p class="note">ข้อความได้จาก OCR ของหน้าหนังสือ อาจมีตัวอักษรผิด เครื่องหมายระยะออกดอก-ผล ความสูง และถิ่นที่อยู่ดูได้จากหน้าต้นฉบับ</p>`:'<span class="muted">—</span>'}</div>
       ${s.y.length?`<div class="box"><h3>ชื่ออื่นในดัชนี (ชื่อพ้อง)</h3>${s.y.map(y=>`<div class="sci">${esc(y)}</div>`).join('')}</div>`:''}
       ${same.length?`<div class="box"><h3>ชนิดอื่นในหน้าเดียวกัน</h3>${same.map(x=>`<div><a href="#/sp/${x.n}"><span class="num">${x.n}</span><span class="sci">${esc(x.s)}</span></a> ${esc(x.t[0]||'')}</div>`).join('')}</div>`:''}
@@ -377,6 +415,124 @@ function viewAbout(){
   <li>ชื่อพ้องได้จากดัชนีท้ายเล่ม หมายเลขชนิดอ้างอิงตามหนังสือ (ไม่ใช่เลขหน้า)</li></ul>
   <h3>ลิขสิทธิ์</h3><p>เนื้อหา ภาพถ่าย และภาพวาดเป็นลิขสิทธิ์ของผู้แต่งและผู้จัดพิมพ์ ฉบับนี้มีไว้เพื่อการศึกษา</p></div>`;
 }
+
+// ---------- phenology
+const MTH=['ม.ค.','ก.พ.','มี.ค.','เม.ย.','พ.ค.','มิ.ย.','ก.ค.','ส.ค.','ก.ย.','ต.ค.','พ.ย.','ธ.ค.'];
+const MTHF=['มกราคม','กุมภาพันธ์','มีนาคม','เมษายน','พฤษภาคม','มิถุนายน','กรกฎาคม','สิงหาคม','กันยายน','ตุลาคม','พฤศจิกายน','ธันวาคม'];
+const PH=SP.filter(s=>s.fl||s.fr);
+const lv=(s,k,i)=>+((s[k]||'000000000000')[i]||0);
+function pcol(kind,l){return l===2?`var(--${kind})`:`color-mix(in srgb,var(--${kind}) 42%,var(--panel))`;}
+function pgrad(s){
+  const st=[];const W=100/12;
+  const cell=i=>{const f=lv(s,'fl',i),r=lv(s,'fr',i);return f&&r?[pcol('fl',f),pcol('fr',r)]:f?[pcol('fl',f)]:r?[pcol('fr',r)]:null;};
+  for(let i=0;i<12;i++){
+    const c=cell(i),x0=i*W,x1=(i+1)*W,pv=i>0?cell(i-1):null,nx=i<11?cell(i+1):null;
+    if(!c){st.push(`transparent ${x0}%`,`transparent ${x1}%`);continue;}
+    if(c.length===1){ if(!pv) st.push(`${c[0]} ${x0}%`); st.push(`${c[0]} ${x0+W/2}%`); if(!nx) st.push(`${c[0]} ${x1}%`); }
+    else { if(!pv) st.push(`${c[0]} ${x0}%`); st.push(`${c[0]} ${x0+W*0.3}%`,`${c[1]} ${x0+W*0.7}%`); if(!nx) st.push(`${c[1]} ${x1}%`); }
+  }
+  return `linear-gradient(to right,${st.join(',')})`;
+}
+function pbar(s,big){return `<div class="pbar${big?' big':''}" data-n="${s.n}"><div class="bg" style="background:${pgrad(s)}"></div><div class="grid">${'<i></i>'.repeat(12)}</div></div>`;}
+function monthsTxt(s,k){const a=[],b=[];for(let i=0;i<12;i++){const l=lv(s,k,i);if(l===2)a.push(MTH[i]);else if(l===1)b.push(MTH[i]);}return {a,b};}
+function legendHTML(){return `<div class="legend"><span><span class="sw" style="background:var(--fl)"></span>ออกดอก (ส่วนใหญ่)</span><span><span class="sw" style="background:${pcol('fl',1)}"></span>ออกดอก (ส่วนน้อย)</span><span><span class="sw" style="background:var(--fr)"></span>ออกผล (ส่วนใหญ่)</span><span><span class="sw" style="background:${pcol('fr',1)}"></span>ออกผล (ส่วนน้อย)</span><span><span class="sw" style="background:linear-gradient(to right,var(--fl),var(--fr))"></span>ช่วงต่อดอก→ผล</span></div>`;}
+const tip=$('#tip');
+document.addEventListener('mousemove',e=>{
+  const b=e.target.closest&&e.target.closest('.pbar');
+  if(!b){tip.style.display='none';return;}
+  const s=BYN[b.dataset.n];const r=b.getBoundingClientRect();const i=Math.max(0,Math.min(11,Math.floor((e.clientX-r.left)/r.width*12)));
+  const f=lv(s,'fl',i),fr=lv(s,'fr',i),L=['—','ส่วนน้อย','ส่วนใหญ่'];
+  tip.innerHTML=`<b>${MTHF[i]}</b> · ${esc(s.t[0]||s.s)}<br>ออกดอก: ${L[f]}<br>ออกผล: ${L[fr]}`;
+  tip.style.display='block';tip.style.left=Math.min(innerWidth-270,e.clientX+14)+'px';tip.style.top=(e.clientY+16)+'px';
+});
+function prow(s){return `<a class="prow" href="#/sp/${s.n}"><div class="nm"><span class="num">${s.n}</span>${esc(s.t[0]||'')} <span class="sci">${esc(s.s)}</span></div>${pbar(s)}</a>`;}
+function firstM(s,k){for(let i=0;i<12;i++)if(lv(s,k,i))return i;return 99;}
+function monthChart(list){
+  const cf=Array(12).fill(0),cr=Array(12).fill(0);
+  list.forEach(s=>{for(let i=0;i<12;i++){if(lv(s,'fl',i))cf[i]++;if(lv(s,'fr',i))cr[i]++;}});
+  const mx=Math.max(1,...cf,...cr);
+  return `<div class="box"><h3>จำนวนชนิดที่ออกดอก / ออกผลในแต่ละเดือน</h3>
+  <div class="legend" style="margin-top:0"><span><span class="sw" style="background:var(--fl)"></span>ออกดอก</span><span><span class="sw" style="background:var(--fr)"></span>ออกผล</span><span>· คลิกเดือนเพื่อค้นหา</span></div>
+  <div class="mchart">${cf.map((v,i)=>`<a class="mc" href="#/season?m=${i+1}" title="${MTHF[i]}: ออกดอก ${v} ชนิด · ออกผล ${cr[i]} ชนิด"><span class="b" style="height:${v/mx*100}%;background:var(--fl)"></span><span class="b" style="height:${cr[i]/mx*100}%;background:var(--fr)"></span></a>`).join('')}</div>
+  <div class="months" style="margin-top:4px">${MTH.map(m=>`<span>${m}</span>`).join('')}</div></div>`;
+}
+let PSTATE={sort:'n',fam:'',q:''};
+function viewPhen(){
+  setTab('phen');
+  const fams=[...new Set(PH.map(s=>s.f).filter(Boolean))].sort((a,b)=>(FAM[a]?.page||999)-(FAM[b]?.page||999));
+  app.innerHTML=`<h2>ปฏิทินการออกดอก-ออกผล</h2>
+  <p class="muted">สรุปจากแถบสัญลักษณ์ใต้ชื่อของแต่ละชนิดในหนังสือ (${PH.length} ชนิดที่มีแถบ) · แถวบนในหนังสือคือระยะออกดอก แถวล่างคือระยะออกผล รวมไว้ในแถบเดียว มกราคม → ธันวาคม</p>
+  ${monthChart(PH)}
+  ${legendHTML()}
+  <div class="ctl"><label>เรียงตาม <select id="psort"><option value="n">หมายเลขชนิด</option><option value="fl">เดือนเริ่มออกดอก</option><option value="fr">เดือนเริ่มออกผล</option><option value="th">ชื่อไทย</option></select></label>
+  <label>วงศ์ <select id="pfam"><option value="">ทุกวงศ์</option>${fams.map(k=>`<option value="${esc(k)}">${esc(famName(k))} ${esc(famThai(k))}</option>`).join('')}</select></label>
+  <input type="text" id="pq" placeholder="กรองชื่อ…" value="${esc(PSTATE.q)}"></div>
+  <div class="ptable" id="ptab"></div>`;
+  $('#psort').value=PSTATE.sort;$('#pfam').value=PSTATE.fam;
+  const draw=()=>{
+    let L=PH.filter(s=>(!PSTATE.fam||s.f===PSTATE.fam)&&(!PSTATE.q||s._k.includes(norm(PSTATE.q))));
+    const so=PSTATE.sort;
+    L.sort((a,b)=> so==='fl'?firstM(a,'fl')-firstM(b,'fl')||num(a.n)-num(b.n): so==='fr'?firstM(a,'fr')-firstM(b,'fr')||num(a.n)-num(b.n): so==='th'?collTH.compare(a.t[0]||'ฮฮ',b.t[0]||'ฮฮ'):num(a.n)-num(b.n));
+    $('#ptab').innerHTML=`<div class="prow head"><div class="nm muted">${L.length} ชนิด</div><div class="months">${MTH.map(m=>`<span>${m}</span>`).join('')}</div></div>`+L.map(prow).join('');
+  };
+  $('#psort').onchange=e=>{PSTATE.sort=e.target.value;draw()};
+  $('#pfam').onchange=e=>{PSTATE.fam=e.target.value;draw()};
+  $('#pq').oninput=e=>{PSTATE.q=e.target.value;draw()};
+  draw();
+}
+let SSTATE={m:new Set(),type:'fl',lvl:1,mode:'any'};
+function viewSeason(qs){
+  setTab('season');
+  if(qs&&qs.get('m')){SSTATE.m=new Set(qs.get('m').split(',').map(x=>+x-1).filter(x=>x>=0&&x<12));}
+  if(qs&&qs.get('t'))SSTATE.type=qs.get('t');
+  const now=new Date().getMonth();
+  app.innerHTML=`<h2>ค้นหาตามช่วงเวลาออกดอก-ออกผล</h2>
+  <p class="muted">เลือกเดือน (เลือกได้หลายเดือน) แล้วเลือกว่าต้องการต้นไม้ที่ออกดอก ออกผล หรือทั้งสองอย่าง</p>
+  <div class="mpick" id="mp">${MTH.map((m,i)=>`<button data-i="${i}" class="${SSTATE.m.has(i)?'on':''}" title="${MTHF[i]}">${m}</button>`).join('')}</div>
+  <div class="ctl">
+    <span class="seg" id="ty"><button data-v="fl">ออกดอก</button><button data-v="fr">ออกผล</button><button data-v="both">ดอกหรือผล</button><button data-v="and">ทั้งดอกและผล</button></span>
+    <span class="seg" id="lv"><button data-v="1">รวมส่วนน้อย</button><button data-v="2">เฉพาะส่วนใหญ่</button></span>
+    <span class="seg" id="md"><button data-v="any">เดือนใดเดือนหนึ่ง</button><button data-v="all">ครบทุกเดือนที่เลือก</button></span>
+    <button class="btn" id="now">เดือนนี้ (${MTH[now]})</button><button class="btn" id="clr">ล้าง</button>
+    <span class="seg" id="vw"><button data-v="bars">แถบ</button><button data-v="cards">ภาพ</button></span>
+  </div>
+  ${legendHTML()}
+  <div id="sres"></div>`;
+  const mark=()=>{['ty','lv','md','vw'].forEach(id=>{const v={ty:SSTATE.type,lv:String(SSTATE.lvl),md:SSTATE.mode,vw:SSTATE.view||'bars'}[id];document.querySelectorAll('#'+id+' button').forEach(b=>b.classList.toggle('on',b.dataset.v===v));});document.querySelectorAll('#mp button').forEach(b=>b.classList.toggle('on',SSTATE.m.has(+b.dataset.i)));};
+  const hit=(s,i)=>{const f=lv(s,'fl',i)>=SSTATE.lvl,r=lv(s,'fr',i)>=SSTATE.lvl;return SSTATE.type==='fl'?f:SSTATE.type==='fr'?r:SSTATE.type==='and'?(f&&r):(f||r);};
+  const draw=()=>{
+    mark();
+    const ms=[...SSTATE.m].sort((a,b)=>a-b);
+    const out=$('#sres');
+    if(!ms.length){out.innerHTML='<div class="empty">เลือกเดือนอย่างน้อย 1 เดือน</div>';return;}
+    const L=PH.filter(s=>SSTATE.mode==='all'?ms.every(i=>hit(s,i)):ms.some(i=>hit(s,i))).sort((a,b)=>num(a.n)-num(b.n));
+    const tl={fl:'ออกดอก',fr:'ออกผล',both:'ออกดอกหรือออกผล',and:'ออกทั้งดอกและผล'}[SSTATE.type];
+    const head=`<p><b>${L.length}</b> ชนิดที่${tl}ใน${SSTATE.mode==='all'&&ms.length>1?'ทุกเดือน: ':''}${ms.map(i=>MTHF[i]).join(SSTATE.mode==='all'?' และ ':' หรือ ')}${SSTATE.lvl===2?' (เฉพาะช่วงที่พบส่วนใหญ่)':''}</p>`;
+    if(!L.length){out.innerHTML=head+'<div class="empty">ไม่พบชนิดที่ตรงเงื่อนไข</div>';return;}
+    out.innerHTML=head+((SSTATE.view==='cards')?`<div class="grid">${L.map(s=>card(s,mkHL('')).replace('</div></a>',`</div><div style="padding:0 11px 10px">${pbar(s)}</div></a>`)).join('')}</div>`
+      :`<div class="ptable"><div class="prow head"><div class="nm muted">${L.length} ชนิด</div><div class="months">${MTH.map((m,i)=>`<span style="${SSTATE.m.has(i)?'color:var(--ink);font-weight:700':''}">${m}</span>`).join('')}</div></div>${L.map(prow).join('')}</div>`);
+  };
+  const sync=()=>{const ms=[...SSTATE.m].sort((a,b)=>a-b).map(i=>i+1).join(',');history.replaceState(null,'','#/season'+(ms?`?m=${ms}&t=${SSTATE.type}`:''));draw();};
+  document.querySelectorAll('#mp button').forEach(b=>b.onclick=()=>{const i=+b.dataset.i;SSTATE.m.has(i)?SSTATE.m.delete(i):SSTATE.m.add(i);sync();});
+  document.querySelectorAll('#ty button').forEach(b=>b.onclick=()=>{SSTATE.type=b.dataset.v;sync();});
+  document.querySelectorAll('#lv button').forEach(b=>b.onclick=()=>{SSTATE.lvl=+b.dataset.v;draw();});
+  document.querySelectorAll('#md button').forEach(b=>b.onclick=()=>{SSTATE.mode=b.dataset.v;draw();});
+  document.querySelectorAll('#vw button').forEach(b=>b.onclick=()=>{SSTATE.view=b.dataset.v;draw();});
+  $('#now').onclick=()=>{SSTATE.m=new Set([now]);sync();};
+  $('#clr').onclick=()=>{SSTATE.m=new Set();sync();};
+  draw();
+}
+function phenBox(s){
+  if(!s.fl&&!s.fr) return '';
+  const f=monthsTxt(s,'fl'),r=monthsTxt(s,'fr');
+  const t=o=>o.a.length||o.b.length?`${o.a.length?'<b>'+o.a.join(' ')+'</b>':''}${o.b.length?` <span class="muted">(บางส่วน: ${o.b.join(' ')})</span>`:''}`:'<span class="muted">—</span>';
+  return `<div class="box"><h3>ระยะออกดอก-ออกผล</h3>
+   <div class="months">${MTH.map(m=>`<span>${m}</span>`).join('')}</div>${pbar(s,true)}
+   <div style="margin-top:8px;font-size:14.5px"><div><span class="sw" style="display:inline-block;width:12px;height:12px;border-radius:3px;background:var(--fl);margin-right:6px"></span>ออกดอก: ${t(f)}</div>
+   <div><span class="sw" style="display:inline-block;width:12px;height:12px;border-radius:3px;background:var(--fr);margin-right:6px"></span>ออกผล: ${t(r)}</div></div>
+   <p class="note">อ่านจากแถบสัญลักษณ์ในหนังสือโดยอัตโนมัติ · <a href="#/season?m=${firstM(s,'fl')<12?firstM(s,'fl')+1:1}&t=fl">หาชนิดอื่นที่ออกดอกช่วงเดียวกัน</a></p></div>`;
+}
+
 // ---------- router
 function route(){
   const h=decodeURIComponent(location.hash.slice(1)||'/');
@@ -390,6 +546,8 @@ function route(){
     case 'fam': return parts[1]?viewFam(parts.slice(1).join('/')):viewFams();
     case 'page': return viewPage(+parts[1]);
     case 'about': return viewAbout();
+    case 'phen': return viewPhen();
+    case 'season': return viewSeason(qs);
   }
   viewHome();
 }
