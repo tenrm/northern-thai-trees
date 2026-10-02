@@ -1,0 +1,403 @@
+<!doctype html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ต้นไม้เมืองเหนือ · คู่มือออนไลน์</title>
+<meta name="description" content="คู่มือศึกษาพรรณไม้ยืนต้นในป่าภาคเหนือ ประเทศไทย ฉบับออนไลน์ ค้นหาด้วยชื่อไทย ชื่อวิทยาศาสตร์ ชื่ออังกฤษ และวงศ์">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sarabun:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Lora:ital,wght@1,500;1,600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#f6f3ea; --panel:#fffdf7; --ink:#1f2a20; --muted:#5e6a5c; --line:#ddd6c4;
+  --brand:#2f5d3a; --brand-2:#477a4f; --accent:#b5651d; --chip:#e9efe2; --chip-ink:#2f5d3a;
+  --shadow:0 1px 2px rgba(30,40,25,.06),0 4px 14px rgba(30,40,25,.06);
+  --radius:12px;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#141a15; --panel:#1c241d; --ink:#e7eadf; --muted:#9fab9b; --line:#334034;
+    --brand:#8fc49a; --brand-2:#a8d4b0; --accent:#e0a060; --chip:#253328; --chip-ink:#b9dcbf;
+    --shadow:0 1px 2px rgba(0,0,0,.3),0 4px 14px rgba(0,0,0,.25);
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#141a15; --panel:#1c241d; --ink:#e7eadf; --muted:#9fab9b; --line:#334034;
+  --brand:#8fc49a; --brand-2:#a8d4b0; --accent:#e0a060; --chip:#253328; --chip-ink:#b9dcbf;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 4px 14px rgba(0,0,0,.25);
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--bg);color:var(--ink);font-family:"Sarabun",system-ui,"Leelawadee UI","Tahoma",sans-serif;font-size:16px;line-height:1.6}
+a{color:var(--brand);text-decoration:none}
+a:hover{text-decoration:underline}
+.sci{font-family:"Lora",Georgia,serif;font-style:italic;font-weight:500}
+header.top{position:sticky;top:0;z-index:20;background:var(--panel);border-bottom:1px solid var(--line);box-shadow:var(--shadow)}
+.bar{max-width:1180px;margin:0 auto;padding:10px 16px;display:flex;gap:14px;align-items:center;flex-wrap:wrap}
+.brand{display:flex;align-items:center;gap:10px;color:var(--ink);text-decoration:none!important;min-width:0}
+.brand svg{flex:none}
+.brand b{font-size:20px;line-height:1.1;display:block}
+.brand small{display:block;color:var(--muted);font-size:12.5px;line-height:1.2}
+.search{flex:1 1 320px;display:flex;align-items:center;gap:8px;background:var(--bg);border:1px solid var(--line);border-radius:999px;padding:6px 14px}
+.search input{flex:1;min-width:0;border:0;background:transparent;color:var(--ink);font:inherit;font-size:16px;outline:none;padding:4px 0}
+.search:focus-within{border-color:var(--brand)}
+nav.tabs{max-width:1180px;margin:0 auto;padding:0 10px;display:flex;gap:2px;overflow-x:auto;scrollbar-width:none}
+nav.tabs::-webkit-scrollbar{display:none}
+nav.tabs a{white-space:nowrap;padding:8px 12px;border-bottom:3px solid transparent;color:var(--muted);font-weight:500;text-decoration:none}
+nav.tabs a.on{color:var(--brand);border-color:var(--brand)}
+.iconbtn{border:1px solid var(--line);background:var(--panel);color:var(--ink);border-radius:999px;width:36px;height:36px;display:grid;place-items:center;cursor:pointer;flex:none}
+main{max-width:1180px;margin:0 auto;padding:20px 16px 60px}
+h1,h2,h3{line-height:1.25;margin:0 0 .4em}
+h1{font-size:28px}
+h2{font-size:22px}
+.muted{color:var(--muted)}
+.hero{display:grid;grid-template-columns:1.2fr 1fr;gap:24px;align-items:center;background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:24px;box-shadow:var(--shadow);margin-bottom:22px}
+.hero img{width:100%;border-radius:12px;display:block}
+.stats{display:flex;gap:10px;flex-wrap:wrap;margin:14px 0}
+.stat{background:var(--chip);color:var(--chip-ink);border-radius:10px;padding:8px 12px}
+.stat b{font-size:20px;display:block;line-height:1.1}
+.quick{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px;margin-top:6px}
+.quick a{display:block;background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:14px 16px;color:var(--ink);box-shadow:var(--shadow);text-decoration:none}
+.quick a:hover{border-color:var(--brand)}
+.quick a b{display:block;color:var(--brand)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:14px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;color:var(--ink);text-decoration:none!important;box-shadow:var(--shadow);display:flex;flex-direction:column;transition:transform .12s}
+.card:hover{transform:translateY(-2px);border-color:var(--brand)}
+.card .ph{aspect-ratio:4/3;background:var(--chip);overflow:hidden;display:grid;place-items:center;color:var(--muted);font-size:13px}
+.card .ph img{width:100%;height:100%;object-fit:cover;display:block}
+.card .tx{padding:9px 11px 11px}
+.card .th{font-weight:600;font-size:16.5px}
+.card .sc{font-size:14.5px}
+.card .meta{font-size:12.5px;color:var(--muted);margin-top:2px}
+.num{display:inline-block;min-width:2.2em;text-align:center;background:var(--brand);color:var(--panel);border-radius:6px;font-size:12px;font-weight:700;padding:0 6px;margin-right:6px;vertical-align:2px}
+.letters{display:flex;flex-wrap:wrap;gap:4px;margin:6px 0 16px;position:sticky;top:var(--hh,108px);background:var(--bg);padding:6px 0;z-index:5}
+.letters a{min-width:30px;text-align:center;padding:2px 6px;border:1px solid var(--line);border-radius:6px;background:var(--panel);font-weight:600;text-decoration:none}
+.idx{columns:3 280px;column-gap:28px}
+.idx .grp{}
+.idx h3{font-size:20px;color:var(--accent);border-bottom:1px solid var(--line);padding-bottom:2px;margin:14px 0 6px;break-after:avoid}
+.idx .row{display:flex;justify-content:space-between;gap:10px;padding:2px 0;break-inside:avoid;border-bottom:1px dotted transparent}
+.idx .row:hover{border-bottom-color:var(--line)}
+.idx .row a{color:var(--ink)}
+.idx .row .r{color:var(--muted);font-size:13.5px;text-align:right;margin-left:auto}
+.idx .row{flex-wrap:wrap;column-gap:10px}
+.idx .row a{min-width:0;overflow-wrap:anywhere}
+.idx .syn{color:var(--muted)}
+.fams{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:10px}
+.fams a{display:flex;justify-content:space-between;gap:8px;background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:10px 14px;color:var(--ink);text-decoration:none}
+.fams a:hover{border-color:var(--brand)}
+.sp-head{display:flex;flex-wrap:wrap;gap:10px 18px;align-items:baseline;margin-bottom:6px}
+.sp-head .big{font-size:30px}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0}
+.chip{background:var(--chip);color:var(--chip-ink);border-radius:999px;padding:2px 11px;font-size:14px}
+.spwrap{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(0,1fr);gap:22px;margin-top:12px}
+.gallery{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:8px}
+.gallery button{padding:0;border:1px solid var(--line);border-radius:10px;overflow:hidden;background:var(--chip);cursor:zoom-in;aspect-ratio:1}
+.gallery img{width:100%;height:100%;object-fit:cover;display:block}
+.box{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:14px 16px;box-shadow:var(--shadow);margin-bottom:14px}
+.box h3{font-size:16px;color:var(--brand);margin-bottom:6px}
+.desc{white-space:pre-line}
+.note{font-size:13px;color:var(--muted);border-left:3px solid var(--accent);padding:2px 10px;margin:8px 0}
+.btn{display:inline-flex;align-items:center;gap:6px;border:1px solid var(--line);background:var(--panel);color:var(--ink);border-radius:999px;padding:6px 14px;font:inherit;font-size:14.5px;cursor:pointer;text-decoration:none!important}
+.btn:hover{border-color:var(--brand)}
+.btn.pri{background:var(--brand);color:var(--panel);border-color:var(--brand)}
+.pager{display:flex;justify-content:space-between;gap:10px;margin-top:18px;flex-wrap:wrap}
+.pageview{display:grid;grid-template-columns:minmax(0,1fr) 280px;gap:20px}
+.pageview .pg{background:#fff;border:1px solid var(--line);border-radius:8px;overflow:hidden;box-shadow:var(--shadow)}
+.pageview .pg img{width:100%;display:block}
+.pgctl{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-bottom:12px}
+.pgctl input{width:84px;font:inherit;padding:5px 8px;border:1px solid var(--line);border-radius:8px;background:var(--panel);color:var(--ink)}
+.toc a{display:block;padding:3px 0}
+.lb{position:fixed;inset:0;background:rgba(10,14,10,.92);z-index:100;display:none;align-items:center;justify-content:center;flex-direction:column;padding:16px}
+.lb.on{display:flex}
+.lb img{max-width:100%;max-height:calc(100vh - 90px);border-radius:6px;background:#fff}
+.lb .cap{color:#dfe6da;margin-top:10px;font-size:14px;text-align:center}
+.lb .x,.lb .pv,.lb .nx{position:absolute;background:rgba(255,255,255,.12);color:#fff;border:0;width:46px;height:46px;border-radius:50%;font-size:24px;cursor:pointer}
+.lb .x{top:14px;right:14px}.lb .pv{left:14px;top:50%}.lb .nx{right:14px;top:50%}
+.empty{padding:40px 10px;text-align:center;color:var(--muted)}
+.toolbar{display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin-bottom:14px}
+.toolbar label{display:flex;gap:6px;align-items:center;font-size:14.5px;color:var(--muted)}
+mark{background:#f3d27a;color:inherit;border-radius:3px;padding:0 1px}
+footer{max-width:1180px;margin:0 auto;padding:20px 16px 40px;color:var(--muted);font-size:13px;border-top:1px solid var(--line)}
+@media (max-width:820px){
+  .hero{grid-template-columns:1fr}
+  .spwrap,.pageview{grid-template-columns:1fr}
+  .sp-head .big{font-size:24px}
+  .brand small{display:none}
+  .search{order:3;flex-basis:100%}
+  .iconbtn{margin-left:auto}
+  .grid{grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px}
+}
+</style>
+</head>
+<body>
+<header class="top" id="hdr">
+  <div class="bar">
+    <a class="brand" href="#/">
+      <svg width="34" height="34" viewBox="0 0 34 34" aria-hidden="true"><circle cx="17" cy="13" r="10" fill="var(--brand-2)"/><circle cx="10" cy="16" r="6" fill="var(--brand)"/><circle cx="24" cy="16" r="6" fill="var(--brand)"/><rect x="15.5" y="18" width="3" height="13" rx="1" fill="var(--accent)"/></svg>
+      <span><b>ต้นไม้เมืองเหนือ</b><small>คู่มือศึกษาพรรณไม้ยืนต้นในป่าภาคเหนือ · Trees of Northern Thailand</small></span>
+    </a>
+    <label class="search" role="search">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+      <input id="q" type="search" placeholder="ค้นหา: ชื่อไทย, ชื่อวิทยาศาสตร์, English, วงศ์ หรือหมายเลข" autocomplete="off">
+    </label>
+    <button class="iconbtn" id="theme" title="สลับโหมดสว่าง/มืด" aria-label="สลับโหมดสี">◐</button>
+  </div>
+  <nav class="tabs" id="tabs">
+    <a href="#/" data-t="home">หน้าแรก</a>
+    <a href="#/search" data-t="search">ค้นหา</a>
+    <a href="#/idx/th" data-t="th">ดัชนีชื่อไทย</a>
+    <a href="#/idx/sci" data-t="sci">Scientific names</a>
+    <a href="#/idx/en" data-t="en">English names</a>
+    <a href="#/fam" data-t="fam">วงศ์ (Families)</a>
+    <a href="#/page/16" data-t="page">หน้าหนังสือ</a>
+    <a href="#/about" data-t="about">เกี่ยวกับ</a>
+  </nav>
+</header>
+<main id="app"></main>
+<footer>
+  ดัดแปลงเป็นฉบับออนไลน์จากหนังสือ <b>ต้นไม้เมืองเหนือ: คู่มือศึกษาพรรณไม้ยืนต้นในป่าภาคเหนือ ประเทศไทย</b> โดย ไซมอน การ์ดเนอร์, พินดา สิทธิสุนทร และวิไลวรรณ อนุสารสุนทร ·
+  ลิขสิทธิ์เนื้อหาและภาพเป็นของผู้แต่งและผู้จัดพิมพ์ · ข้อความคำบรรยายได้จากการอ่านอักขระอัตโนมัติ (OCR) อาจคลาดเคลื่อน โปรดตรวจกับหน้าต้นฉบับ
+</footer>
+<div class="lb" id="lb" role="dialog" aria-modal="true">
+  <button class="x" aria-label="ปิด">×</button><button class="pv" aria-label="ก่อนหน้า">‹</button><button class="nx" aria-label="ถัดไป">›</button>
+  <img id="lbimg" alt=""><div class="cap" id="lbcap"></div>
+</div>
+<script src="data.js"></script>
+<script>
+(function(){
+const D=window.TREEDATA, OFF=D.offset, NP=D.npages;
+const SP=D.species, BYN={}; SP.forEach(s=>BYN[s.n]=s);
+const FAM={}; D.fams.forEach(f=>FAM[f.k]=f);
+const BYPAGE={}; SP.forEach(s=>{ if(s.p){(BYPAGE[s.p]=BYPAGE[s.p]||[]).push(s);} });
+const PHPAGE={}; SP.forEach(s=>s.ph.forEach(f=>{const p=+f.slice(1,4);(PHPAGE[p]=PHPAGE[p]||new Set()).add(s.n);}));
+const collTH=new Intl.Collator('th'), collEN=new Intl.Collator('en',{sensitivity:'base'});
+const $=s=>document.querySelector(s), app=$('#app');
+const esc=t=>String(t==null?'':t).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const bookPg=p=>p>OFF?(p-OFF):null;
+const famName=k=>{const f=FAM[k];return f?f.name:(k||'')};
+const famThai=k=>{const f=FAM[k];return f?f.thai:''};
+const thumb=f=>'thumbs/'+f, photo=f=>'photos/'+f, pageImg=p=>'pages/pg-'+String(p).padStart(3,'0')+'.jpg';
+const norm=t=>String(t||'').toLowerCase().normalize('NFKD').replace(/[̀-ͯ]/g,'').replace(/[\s\-.,'’()]/g,'');
+SP.forEach(s=>{s._k=norm([s.n,s.s,s.y.join(' '),s.t.join(' '),s.e.join(' '),famName(s.f),famThai(s.f),s.f].join('|'));s._d=norm(s.d);});
+function setHH(){document.documentElement.style.setProperty('--hh',($('#hdr').offsetHeight)+'px')}
+window.addEventListener('resize',setHH);
+
+// theme
+try{const t=localStorage.getItem('theme');if(t)document.documentElement.dataset.theme=t;}catch(e){}
+$('#theme').onclick=()=>{const cur=document.documentElement.dataset.theme||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');const nx=cur==='dark'?'light':'dark';document.documentElement.dataset.theme=nx;try{localStorage.setItem('theme',nx)}catch(e){}};
+
+function card(s,hl){
+  const t=s.t[0]||'', ph=s.ph[0];
+  return `<a class="card" href="#/sp/${s.n}">
+    <div class="ph">${ph?`<img loading="lazy" src="${thumb(ph)}" alt="${esc(t||s.s)}">`:'ไม่มีภาพ'}</div>
+    <div class="tx"><div class="th"><span class="num">${s.n}</span>${hl(t)||'<span class="muted">—</span>'}</div>
+    <div class="sc sci">${hl(s.s)}</div>
+    <div class="meta">${esc(famName(s.f))}${s.p?` · หน้า ${bookPg(s.p)}`:''}</div></div></a>`;
+}
+function mkHL(q){
+  if(!q) return t=>esc(t);
+  const re=new RegExp('('+q.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')+')','ig');
+  return t=>esc(t).replace(re,'<mark>$1</mark>');
+}
+function setTab(t){document.querySelectorAll('#tabs a').forEach(a=>a.classList.toggle('on',a.dataset.t===t));}
+
+// ---------- views
+function viewHome(){
+  setTab('home');
+  const nMain=SP.filter(s=>s.m).length, nPh=SP.reduce((a,s)=>a+s.ph.length,0);
+  const feat=['626','138','6','871','426','7'].map(n=>BYN[n]).filter(Boolean);
+  const heroPh=(BYN['626']&&BYN['626'].ph[0])||'';
+  app.innerHTML=`
+  <section class="hero">
+    <div>
+      <h1>ต้นไม้เมืองเหนือ</h1>
+      <div class="muted">คู่มือศึกษาพรรณไม้ยืนต้นในป่าภาคเหนือ ประเทศไทย · ฉบับออนไลน์</div>
+      <div class="stats">
+        <div class="stat"><b>${SP.length}</b>ชนิดในดัชนี</div>
+        <div class="stat"><b>${nMain}</b>ชนิดที่มีคำบรรยาย</div>
+        <div class="stat"><b>${nPh.toLocaleString()}</b>ภาพถ่าย/ภาพวาด</div>
+        <div class="stat"><b>${D.fams.length}</b>วงศ์</div>
+      </div>
+      <p>พิมพ์ชื่อในช่องค้นหาด้านบน หรือเลือกดัชนีด้านล่าง แต่ละชนิดมีรูปถ่ายที่ตัดจากหนังสือ ข้อความคำบรรยาย และลิงก์ไปยังหน้าต้นฉบับ</p>
+    </div>
+    ${heroPh?`<img src="${photo(heroPh)}" alt="เพกา Oroxylum indicum">`:''}
+  </section>
+  <div class="quick">
+    <a href="#/idx/th"><b>ดัชนีชื่อไทย</b>ชื่อพื้นเมือง เรียง ก–ฮ</a>
+    <a href="#/idx/sci"><b>Scientific names</b>ชื่อวิทยาศาสตร์และชื่อพ้อง A–Z</a>
+    <a href="#/idx/en"><b>English names</b>ชื่อสามัญภาษาอังกฤษ A–Z</a>
+    <a href="#/fam"><b>วงศ์ (Families)</b>${D.fams.length} วงศ์ เรียงตามระบบในหนังสือ</a>
+    <a href="#/page/16"><b>หน้าหนังสือ</b>เปิดอ่านหน้าต้นฉบับ รูปวิธาน และตาราง</a>
+  </div>
+  <h2 style="margin-top:26px">ตัวอย่างพรรณไม้</h2>
+  <div class="grid">${feat.map(s=>card(s,mkHL(''))).join('')}</div>`;
+}
+let searchTimer;
+function viewSearch(q){
+  setTab('search');
+  const box=$('#q'); if(box.value!==q) box.value=q;
+  let full=false; try{full=sessionStorage.getItem('full')==='1'}catch(e){}
+  const nq=norm(q);
+  let res=[];
+  if(nq){
+    res=SP.filter(s=>s._k.includes(nq)||(full&&s._d.includes(nq)));
+    res.sort((a,b)=>score(b,nq)-score(a,nq)||num(a.n)-num(b.n));
+  } else res=SP.filter(s=>s.m);
+  const hl=mkHL(q.trim());
+  app.innerHTML=`<div class="toolbar"><h2 style="margin:0">${nq?`ผลการค้นหา “${esc(q)}”`:'พรรณไม้ทั้งหมด'}</h2>
+    <span class="muted">${res.length} ชนิด</span>
+    <label><input type="checkbox" id="full" ${full?'checked':''}> ค้นในข้อความคำบรรยายด้วย</label></div>
+    ${res.length?`<div class="grid">${res.slice(0,400).map(s=>card(s,hl)).join('')}</div>${res.length>400?'<p class="muted">แสดง 400 รายการแรก — พิมพ์คำค้นให้เจาะจงขึ้น</p>':''}`:'<div class="empty">ไม่พบชนิดที่ตรงกับคำค้น ลองสะกดอย่างอื่น หรือเปิด “ค้นในข้อความคำบรรยาย”</div>'}`;
+  $('#full').onchange=e=>{try{sessionStorage.setItem('full',e.target.checked?'1':'0')}catch(_){}viewSearch(q)};
+}
+function num(n){const m=/^(\d+)([a-z]?)/.exec(n);return m?(+m[1]+(m[2]?(m[2].charCodeAt(0)-96)/10:0)):9999}
+function score(s,nq){
+  if(s.n===nq) return 100;
+  if(s.t.some(t=>norm(t)===nq)||norm(s.s)===nq) return 90;
+  if(s.t.some(t=>norm(t).startsWith(nq))||norm(s.s).startsWith(nq)) return 70;
+  if(s._k.includes(nq)) return 50+(s.m?5:0)+(s.ph.length?3:0);
+  return 10;
+}
+function thLetter(t){const m=/[ก-ฮ]/.exec(t);return m?m[0]:'#';}
+function viewIndex(kind){
+  setTab(kind);
+  let rows=[], title='', letters=[];
+  if(kind==='th'){
+    title='ดัชนีชื่อไทย (ชื่อพื้นเมือง)';
+    SP.forEach(s=>s.t.forEach(t=>rows.push({k:t,s, l:thLetter(t)})));
+    rows.sort((a,b)=>collTH.compare(a.k,b.k)||num(a.s.n)-num(b.s.n));
+  } else if(kind==='sci'){
+    title='Index to scientific names · ดัชนีชื่อวิทยาศาสตร์';
+    SP.forEach(s=>{rows.push({k:s.s,s,l:(s.s[0]||'#').toUpperCase()}); s.y.forEach(y=>rows.push({k:y,s,syn:1,l:(y[0]||'#').toUpperCase()}));});
+    rows.sort((a,b)=>collEN.compare(a.k,b.k)||num(a.s.n)-num(b.s.n));
+  } else {
+    title='Index to English names · ดัชนีชื่อภาษาอังกฤษ';
+    SP.forEach(s=>s.e.forEach(e=>rows.push({k:e,s,l:(e.replace(/^[^A-Za-z]+/,'')[0]||'#').toUpperCase()})));
+    rows.sort((a,b)=>collEN.compare(a.k,b.k));
+  }
+  const gm=new Map();
+  rows.forEach(r=>{ if(!gm.has(r.l)) gm.set(r.l,{l:r.l,rows:[]}); gm.get(r.l).rows.push(r);});
+  const groups=[...gm.values()].sort((a,b)=>(kind==='th'?collTH:collEN).compare(a.l,b.l));
+  // merge th groups sorted by collator order
+  app.innerHTML=`<h2>${title}</h2><p class="muted">${rows.length.toLocaleString()} รายการ · ตัวเลขคือหมายเลขชนิดในหนังสือ</p>
+   <div class="letters">${groups.map(g=>`<a href="javascript:void 0" data-l="${esc(g.l)}">${esc(g.l)}</a>`).join('')}</div>
+   <div class="idx">${groups.map(g=>`<div class="grp" id="L-${esc(g.l)}"><h3>${esc(g.l)}</h3>${g.rows.map(r=>`<div class="row"><a href="#/sp/${r.s.n}" class="${kind!=='th'&&!r.syn&&kind==='sci'?'sci':''}${r.syn?' syn sci':''}">${esc(r.k)}</a><span class="r">${kind==='th'?`<span class="sci">${esc(r.s.s)}</span> · `:kind==='en'?`<span class="sci">${esc(r.s.s)}</span> · `:(r.syn?`= ${esc(r.s.s)} · `:'')}${r.s.n}</span></div>`).join('')}</div>`).join('')}</div>`;
+  app.querySelectorAll('.letters a').forEach(a=>a.onclick=()=>{const el=document.getElementById('L-'+a.dataset.l);if(el){window.scrollTo({top:el.getBoundingClientRect().top+scrollY-($('#hdr').offsetHeight+60),behavior:'smooth'});}});
+}
+function viewFams(){
+  setTab('fam');
+  const cnt={};SP.forEach(s=>{cnt[s.f]=(cnt[s.f]||0)+1});
+  const list=D.fams.slice().sort((a,b)=>(a.page||999)-(b.page||999));
+  app.innerHTML=`<h2>วงศ์ (Families)</h2><p class="muted">เรียงตามลำดับในหนังสือ · คลิกเพื่อดูชนิดในวงศ์</p>
+  <div class="fams">${list.map(f=>`<a href="#/fam/${encodeURIComponent(f.k)}"><span><b>${esc(f.name)}</b><br><span class="muted">${esc(f.thai)}</span></span><span class="muted">${cnt[f.k]||0} ชนิด</span></a>`).join('')}</div>`;
+}
+function viewFam(k){
+  setTab('fam');
+  const f=FAM[k]; const list=SP.filter(s=>s.f===k).sort((a,b)=>num(a.n)-num(b.n));
+  app.innerHTML=`<p><a href="#/fam">← วงศ์ทั้งหมด</a></p><h2>${esc(f?f.name:k)} <span class="muted" style="font-weight:400">${esc(f?f.thai:'')}</span></h2>
+   <div class="chips">${f&&f.page?`<a class="btn" href="#/page/${f.page}">หน้าแนะนำวงศ์ในหนังสือ (หน้า ${bookPg(f.page)})</a>`:''}${f&&f.page2?`<a class="btn" href="#/page/${f.page2}">ข้อมูลเพิ่มเติม ตอนที่ 2 (หน้า ${bookPg(f.page2)})</a>`:''}</div>
+   <div class="grid" style="margin-top:12px">${list.map(s=>card(s,mkHL(''))).join('')}</div>`;
+}
+let LB={list:[],i:0,cap:''};
+function openLB(list,i,cap){LB={list,i,cap};showLB();$('#lb').classList.add('on');}
+function showLB(){$('#lbimg').src=photo(LB.list[LB.i]);$('#lbcap').textContent=`${LB.cap} · ภาพ ${LB.i+1}/${LB.list.length}`;}
+$('#lb .x').onclick=()=>$('#lb').classList.remove('on');
+$('#lb .pv').onclick=e=>{e.stopPropagation();LB.i=(LB.i-1+LB.list.length)%LB.list.length;showLB();};
+$('#lb .nx').onclick=e=>{e.stopPropagation();LB.i=(LB.i+1)%LB.list.length;showLB();};
+$('#lb').onclick=e=>{if(e.target.id==='lb')$('#lb').classList.remove('on')};
+document.addEventListener('keydown',e=>{if(!$('#lb').classList.contains('on'))return;if(e.key==='Escape')$('#lb').classList.remove('on');if(e.key==='ArrowLeft')$('#lb .pv').click();if(e.key==='ArrowRight')$('#lb .nx').click();});
+
+function viewSp(n){
+  setTab('');
+  const s=BYN[n]; if(!s){app.innerHTML='<div class="empty">ไม่พบชนิดนี้</div>';return;}
+  const i=SP.indexOf(s), prev=SP[i-1], next=SP[i+1];
+  const f=FAM[s.f];
+  const same=(BYPAGE[s.p]||[]).filter(x=>x!==s);
+  app.innerHTML=`
+  <p class="muted" style="margin:0 0 6px">${f?`<a href="#/fam/${encodeURIComponent(s.f)}">${esc(f.name)}</a> ${esc(f.thai)}`:''}</p>
+  <div class="sp-head"><span class="num" style="font-size:16px;padding:2px 10px">${s.n}</span>
+    <span class="big sci">${esc(s.s)}</span></div>
+  <div style="font-size:22px;font-weight:600">${esc(s.t.join(' · '))||'<span class="muted" style="font-weight:400;font-size:16px">ไม่มีชื่อไทยในดัชนี</span>'}</div>
+  ${s.e.length?`<div class="muted">English: ${esc(s.e.join(', '))}</div>`:''}
+  <div class="chips">
+    ${s.p?`<a class="btn pri" href="#/page/${s.p}">ดูหน้าต้นฉบับ (หน้า ${bookPg(s.p)})</a>`:''}
+    ${f&&f.page2?`<a class="btn" href="#/page/${f.page2}">ข้อมูลเพิ่มเติม ตอนที่ 2</a>`:''}
+  </div>
+  <div class="spwrap">
+    <div>
+      ${s.ph.length?`<div class="gallery">${s.ph.map((p,k)=>`<button data-k="${k}" aria-label="ขยายภาพ ${k+1}"><img loading="lazy" src="${thumb(p)}" alt="${esc(s.s)} ภาพ ${k+1}"></button>`).join('')}</div>
+      <p class="note">ภาพตัดจากหนังสือโดยอัตโนมัติ คลิกเพื่อขยาย หากภาพไม่ตรงชนิด ดูหน้าต้นฉบับประกอบ</p>`
+      :`<div class="box"><span class="muted">${s.m?'ชนิดนี้ไม่มีภาพประกอบแยก — ดูหน้าต้นฉบับ':'ชนิดนี้กล่าวถึงในรูปวิธาน/หมายเหตุของชนิดใกล้เคียง (ไม่มีคำบรรยายแยก)'}</span></div>`}
+      ${s.p?`<a href="#/page/${s.p}"><img src="${pageImg(s.p)}" alt="หน้าต้นฉบับ" loading="lazy" style="width:100%;margin-top:12px;border:1px solid var(--line);border-radius:8px;background:#fff"></a>`:''}
+    </div>
+    <div>
+      <div class="box"><h3>คำบรรยาย</h3>${s.d?`<div class="desc">${esc(s.d)}</div><p class="note">ข้อความได้จาก OCR ของหน้าหนังสือ อาจมีตัวอักษรผิด เครื่องหมายระยะออกดอก-ผล ความสูง และถิ่นที่อยู่ดูได้จากหน้าต้นฉบับ</p>`:'<span class="muted">—</span>'}</div>
+      ${s.y.length?`<div class="box"><h3>ชื่ออื่นในดัชนี (ชื่อพ้อง)</h3>${s.y.map(y=>`<div class="sci">${esc(y)}</div>`).join('')}</div>`:''}
+      ${same.length?`<div class="box"><h3>ชนิดอื่นในหน้าเดียวกัน</h3>${same.map(x=>`<div><a href="#/sp/${x.n}"><span class="num">${x.n}</span><span class="sci">${esc(x.s)}</span></a> ${esc(x.t[0]||'')}</div>`).join('')}</div>`:''}
+    </div>
+  </div>
+  <div class="pager">${prev?`<a class="btn" href="#/sp/${prev.n}">‹ ${prev.n} <span class="sci">${esc(prev.s)}</span></a>`:'<span></span>'}${next?`<a class="btn" href="#/sp/${next.n}">${next.n} <span class="sci">${esc(next.s)}</span> ›</a>`:''}</div>`;
+  app.querySelectorAll('.gallery button').forEach(b=>b.onclick=()=>openLB(s.ph,+b.dataset.k,`${s.n} ${s.s} ${s.t[0]||''}`));
+  window.scrollTo(0,0);
+}
+const TOC=[[1,'ปก'],[14,'คำนำ'],[16,'สารบัญ'],[20,'วิธีใช้รูปวิธาน / การเก็บตัวอย่าง'],[24,'ภูมิศาสตร์และชนิดป่าภาคเหนือ'],[33,'รูปวิธานทั่วไป (General keys)'],[38,'รูปวิธานใช้ลักษณะเด่นชัด'],[47,'สรุปการจัดจำแนก'],[48,'ตอนที่ 1: คำบรรยายชนิด'],[397,'ตอนที่ 2: ความรู้และข้อมูลเพิ่มเติม'],[481,'อภิธานศัพท์ (Glossary)'],[493,'ตารางเปรียบเทียบ (Tables)'],[524,'บรรณานุกรม'],[533,'เอกสารอ้างอิงสำคัญ'],[535,'ดัชนีชื่อพื้นเมือง'],[542,'ดัชนีชื่ออังกฤษ'],[546,'ดัชนีชื่อวิทยาศาสตร์'],[563,'ดัชนีวงศ์']];
+function viewPage(p){
+  setTab('page');
+  p=Math.max(1,Math.min(NP,p|0||1));
+  const here=[...new Set([...(BYPAGE[p]||[]).map(s=>s.n),...(PHPAGE[p]?[...PHPAGE[p]]:[])])].map(n=>BYN[n]).filter(Boolean).sort((a,b)=>num(a.n)-num(b.n));
+  app.innerHTML=`<div class="pgctl">
+    <a class="btn" href="#/page/${Math.max(1,p-1)}">‹ ก่อนหน้า</a>
+    <span>หน้า PDF <b>${p}</b>/${NP}${bookPg(p)?` · หน้าหนังสือ <b>${bookPg(p)}</b>`:''}</span>
+    <a class="btn" href="#/page/${Math.min(NP,p+1)}">ถัดไป ›</a>
+    <form id="go" style="display:flex;gap:6px;align-items:center"><span class="muted">ไปหน้าหนังสือ</span><input id="gp" type="number" min="1" max="${NP-OFF}" value="${bookPg(p)||''}"><button class="btn">ไป</button></form>
+  </div>
+  <div class="pageview">
+    <div class="pg"><img src="${pageImg(p)}" alt="หน้า ${p}"></div>
+    <aside>
+      ${here.length?`<div class="box"><h3>ชนิดในหน้านี้</h3>${here.map(x=>`<div><a href="#/sp/${x.n}"><span class="num">${x.n}</span><span class="sci">${esc(x.s)}</span></a><br><span class="muted">${esc(x.t.join(', '))}</span></div>`).join('')}</div>`:''}
+      <div class="box toc"><h3>สารบัญ</h3>${TOC.map(([pp,t])=>`<a href="#/page/${pp}">${esc(t)}</a>`).join('')}</div>
+    </aside>
+  </div>`;
+  $('#go').onsubmit=e=>{e.preventDefault();const v=+$('#gp').value;if(v)location.hash='#/page/'+(v+OFF);};
+  window.scrollTo(0,0);
+}
+function viewAbout(){
+  setTab('about');
+  app.innerHTML=`<div class="box" style="max-width:820px"><h2>เกี่ยวกับคู่มือออนไลน์นี้</h2>
+  <p>ฉบับออนไลน์นี้จัดทำจากไฟล์สแกนหนังสือ <b>ต้นไม้เมืองเหนือ — คู่มือศึกษาพรรณไม้ยืนต้นในป่าภาคเหนือ ประเทศไทย</b> (ไซมอน การ์ดเนอร์, พินดา สิทธิสุนทร, วิไลวรรณ อนุสารสุนทร) เพื่อให้ค้นหาและเปิดดูได้สะดวกบนคอมพิวเตอร์และโทรศัพท์</p>
+  <h3>วิธีใช้</h3>
+  <ul><li>พิมพ์ชื่อไทย ชื่อวิทยาศาสตร์ ชื่อภาษาอังกฤษ ชื่อวงศ์ หรือหมายเลขชนิด ในช่องค้นหาด้านบน (ไม่ต้องสะกดครบ)</li>
+  <li>เปิด “ค้นในข้อความคำบรรยายด้วย” เพื่อค้นลักษณะ เช่น “ใบประกอบ” “ผลมีปีก” “เปลือกชั้นในสีแดง”</li>
+  <li>หน้าชนิดแสดงภาพที่ตัดจากหนังสือ คลิกภาพเพื่อขยาย และปุ่ม “ดูหน้าต้นฉบับ” เพื่ออ่านหน้าหนังสือจริง รวมถึงสัญลักษณ์ระยะออกดอก-ผล ระดับความสูง และสภาพพื้นที่</li>
+  <li>เมนู “หน้าหนังสือ” เปิดอ่านได้ทุกหน้า รวมถึงรูปวิธาน ตาราง และตอนที่ 2 (ชื่อพ้อง การกระจาย การใช้ประโยชน์)</li></ul>
+  <h3>ข้อจำกัด</h3>
+  <ul><li>ข้อความคำบรรยายได้จากการอ่านอักขระอัตโนมัติ (OCR) จึงอาจมีตัวสะกดผิดหรือข้อความจากรูปวิธานปะปน</li>
+  <li>การจับคู่ภาพกับชนิดใช้หมายเลขกำกับบนภาพ ซึ่งตรวจทานแล้วส่วนใหญ่ แต่อาจยังมีบางภาพคลาดเคลื่อน</li>
+  <li>ชื่อพ้องได้จากดัชนีท้ายเล่ม หมายเลขชนิดอ้างอิงตามหนังสือ (ไม่ใช่เลขหน้า)</li></ul>
+  <h3>ลิขสิทธิ์</h3><p>เนื้อหา ภาพถ่าย และภาพวาดเป็นลิขสิทธิ์ของผู้แต่งและผู้จัดพิมพ์ ฉบับนี้มีไว้เพื่อการศึกษา</p></div>`;
+}
+// ---------- router
+function route(){
+  const h=decodeURIComponent(location.hash.slice(1)||'/');
+  const parts=h.split('?')[0].split('/').filter(Boolean);
+  const qs=new URLSearchParams(h.split('?')[1]||'');
+  if(!parts.length) return viewHome();
+  switch(parts[0]){
+    case 'search': return viewSearch(qs.get('q')||'');
+    case 'sp': return viewSp(parts[1]);
+    case 'idx': return viewIndex(parts[1]||'th');
+    case 'fam': return parts[1]?viewFam(parts.slice(1).join('/')):viewFams();
+    case 'page': return viewPage(+parts[1]);
+    case 'about': return viewAbout();
+  }
+  viewHome();
+}
+$('#q').addEventListener('input',e=>{clearTimeout(searchTimer);const v=e.target.value;searchTimer=setTimeout(()=>{const target='#/search?q='+encodeURIComponent(v);if(location.hash.startsWith('#/search'))history.replaceState(null,'',target);else history.pushState(null,'',target);route();},180);});
+$('#q').addEventListener('keydown',e=>{if(e.key==='Enter'){location.hash='#/search?q='+encodeURIComponent(e.target.value);}});
+window.addEventListener('hashchange',route);
+setHH(); route();
+})();
+</script>
+</body>
+</html>
