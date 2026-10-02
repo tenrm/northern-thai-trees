@@ -119,6 +119,15 @@ h2{font-size:22px}
 .toolbar label{display:flex;gap:6px;align-items:center;font-size:14.5px;color:var(--muted)}
 mark{background:#f3d27a;color:inherit;border-radius:3px;padding:0 1px}
 
+
+.hab{display:inline-flex;align-items:center;gap:6px;vertical-align:middle}
+.hab svg{display:block}
+.chk{display:flex;flex-wrap:wrap;gap:6px;margin:6px 0 10px}
+.chk button{display:inline-flex;align-items:center;gap:7px;font:inherit;font-size:14px;padding:5px 12px 5px 8px;border:1px solid var(--line);border-radius:999px;background:var(--panel);color:var(--ink);cursor:pointer}
+.chk button.on{border-color:var(--brand);box-shadow:inset 0 0 0 1.5px var(--brand);background:color-mix(in srgb,var(--brand) 10%,var(--panel))}
+.fgroup{margin:4px 0 6px}
+.fgroup h4{margin:10px 0 2px;font-size:15px;color:var(--brand)}
+.prow .ic{display:inline-flex;gap:3px;vertical-align:-4px;margin-right:4px}
 /* phenology */
 .pbar{position:relative;height:16px;border-radius:4px;background-color:var(--bg);box-shadow:inset 0 0 0 1px var(--line);overflow:hidden}
 .pbar .bg{position:absolute;inset:0}
@@ -183,7 +192,7 @@ footer{max-width:1180px;margin:0 auto;padding:20px 16px 40px;color:var(--muted);
     <a href="#/idx/en" data-t="en">English names</a>
     <a href="#/fam" data-t="fam">วงศ์ (Families)</a>
     <a href="#/phen" data-t="phen">ปฏิทินดอก-ผล</a>
-    <a href="#/season" data-t="season">ค้นหาตามช่วงเวลา</a>
+    <a href="#/season" data-t="season">ค้นหาตามช่วงเวลา/ถิ่นที่อยู่</a>
     <a href="#/page/16" data-t="page">หน้าหนังสือ</a>
     <a href="#/about" data-t="about">เกี่ยวกับ</a>
   </nav>
@@ -193,6 +202,12 @@ footer{max-width:1180px;margin:0 auto;padding:20px 16px 40px;color:var(--muted);
   ดัดแปลงเป็นฉบับออนไลน์จากหนังสือ <b>ต้นไม้เมืองเหนือ: คู่มือศึกษาพรรณไม้ยืนต้นในป่าภาคเหนือ ประเทศไทย</b> โดย ไซมอน การ์ดเนอร์, พินดา สิทธิสุนทร และวิไลวรรณ อนุสารสุนทร ·
   ลิขสิทธิ์เนื้อหาและภาพเป็นของผู้แต่งและผู้จัดพิมพ์ · ข้อความคำบรรยายได้จากการอ่านอักขระอัตโนมัติ (OCR) อาจคลาดเคลื่อน โปรดตรวจกับหน้าต้นฉบับ
 </footer>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+<pattern id="pt-dm" width="4" height="4" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><rect width="4" height="4" fill="var(--panel)"/><rect width="1" height="4" fill="color-mix(in srgb,var(--ink) 35%,var(--panel))"/></pattern>
+<pattern id="pt-mh" width="5" height="5" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><rect width="5" height="5" fill="var(--panel)"/><rect width="2.6" height="5" fill="var(--ink)"/></pattern>
+<pattern id="pt-h" width="6" height="6" patternUnits="userSpaceOnUse"><rect width="6" height="6" fill="var(--panel)"/><rect width="3" height="3" fill="var(--ink)"/><rect x="3" y="3" width="3" height="3" fill="var(--ink)"/></pattern>
+<clipPath id="mtclip"><path d="M2 31 L16 7 L19.5 12 L25 3 L38 31 Z"/></clipPath>
+</defs></svg>
 <div class="tip" id="tip"></div>
 <div class="lb" id="lb" role="dialog" aria-modal="true">
   <button class="x" aria-label="ปิด">×</button><button class="pv" aria-label="ก่อนหน้า">‹</button><button class="nx" aria-label="ถัดไป">›</button>
@@ -264,7 +279,7 @@ function viewHome(){
     <a href="#/idx/en"><b>English names</b>ชื่อสามัญภาษาอังกฤษ A–Z</a>
     <a href="#/fam"><b>วงศ์ (Families)</b>${D.fams.length} วงศ์ เรียงตามระบบในหนังสือ</a>
     <a href="#/phen"><b>ปฏิทินดอก-ผล</b>ช่วงออกดอกและออกผลรายชนิด</a>
-    <a href="#/season"><b>ค้นหาตามช่วงเวลา</b>เดือนนี้มีต้นไม้อะไรออกดอก/ผล</a>
+    <a href="#/season"><b>ค้นหาตามช่วงเวลา/ถิ่นที่อยู่</b>ตามเดือนออกดอก-ผล ความชื้น และความสูง</a>
     <a href="#/page/16"><b>หน้าหนังสือ</b>เปิดอ่านหน้าต้นฉบับ รูปวิธาน และตาราง</a>
   </div>
   <h2 style="margin-top:26px">ตัวอย่างพรรณไม้</h2>
@@ -370,6 +385,7 @@ function viewSp(n){
     </div>
     <div>
       ${phenBox(s)}
+      ${habBox(s)}
       <div class="box"><h3>คำบรรยาย</h3>${s.d?`<div class="desc">${esc(s.d)}</div><p class="note">ข้อความได้จาก OCR ของหน้าหนังสือ อาจมีตัวอักษรผิด เครื่องหมายระยะออกดอก-ผล ความสูง และถิ่นที่อยู่ดูได้จากหน้าต้นฉบับ</p>`:'<span class="muted">—</span>'}</div>
       ${s.y.length?`<div class="box"><h3>ชื่ออื่นในดัชนี (ชื่อพ้อง)</h3>${s.y.map(y=>`<div class="sci">${esc(y)}</div>`).join('')}</div>`:''}
       ${same.length?`<div class="box"><h3>ชนิดอื่นในหน้าเดียวกัน</h3>${same.map(x=>`<div><a href="#/sp/${x.n}"><span class="num">${x.n}</span><span class="sci">${esc(x.s)}</span></a> ${esc(x.t[0]||'')}</div>`).join('')}</div>`:''}
@@ -408,6 +424,7 @@ function viewAbout(){
   <ul><li>พิมพ์ชื่อไทย ชื่อวิทยาศาสตร์ ชื่อภาษาอังกฤษ ชื่อวงศ์ หรือหมายเลขชนิด ในช่องค้นหาด้านบน (ไม่ต้องสะกดครบ)</li>
   <li>เปิด “ค้นในข้อความคำบรรยายด้วย” เพื่อค้นลักษณะ เช่น “ใบประกอบ” “ผลมีปีก” “เปลือกชั้นในสีแดง”</li>
   <li>หน้าชนิดแสดงภาพที่ตัดจากหนังสือ คลิกภาพเพื่อขยาย และปุ่ม “ดูหน้าต้นฉบับ” เพื่ออ่านหน้าหนังสือจริง รวมถึงสัญลักษณ์ระยะออกดอก-ผล ระดับความสูง และสภาพพื้นที่</li>
+  <li>เมนู “ปฏิทินดอก-ผล” สรุประยะออกดอก-ออกผลรายชนิด และ “ค้นหาตามช่วงเวลา/ถิ่นที่อยู่” ค้นตามเดือน ระดับความชื้นของพื้นที่ และช่วงความสูง (อ่านจากสัญลักษณ์ใต้ชื่อชนิดในหนังสือ)</li>
   <li>เมนู “หน้าหนังสือ” เปิดอ่านได้ทุกหน้า รวมถึงรูปวิธาน ตาราง และตอนที่ 2 (ชื่อพ้อง การกระจาย การใช้ประโยชน์)</li></ul>
   <h3>ข้อจำกัด</h3>
   <ul><li>ข้อความคำบรรยายได้จากการอ่านอักขระอัตโนมัติ (OCR) จึงอาจมีตัวสะกดผิดหรือข้อความจากรูปวิธานปะปน</li>
@@ -415,6 +432,27 @@ function viewAbout(){
   <li>ชื่อพ้องได้จากดัชนีท้ายเล่ม หมายเลขชนิดอ้างอิงตามหนังสือ (ไม่ใช่เลขหน้า)</li></ul>
   <h3>ลิขสิทธิ์</h3><p>เนื้อหา ภาพถ่าย และภาพวาดเป็นลิขสิทธิ์ของผู้แต่งและผู้จัดพิมพ์ ฉบับนี้มีไว้เพื่อการศึกษา</p></div>`;
 }
+
+
+// ---------- habitat & elevation icons
+const HB={D:'แห้งแล้ง',DM:'แห้งแล้ง \\ ปานกลาง',M:'ปานกลาง',MH:'ปานกลาง \\ ชื้น',H:'ชื้น',W:'ใกล้แหล่งน้ำ'};
+const HBORD=['D','DM','M','MH','H','W'];
+const ELN=['>1200 ม.','800–1200 ม.','0–800 ม.'];
+function hbFill(c){return {D:'var(--panel)',DM:'url(#pt-dm)',M:'color-mix(in srgb,var(--ink) 40%,var(--panel))',MH:'url(#pt-mh)',H:'url(#pt-h)',W:'var(--ink)'}[c]||'none';}
+function hbIcon(c,sz){sz=sz||18;return `<svg width="${sz*0.72}" height="${sz}" viewBox="0 0 14 20" role="img" aria-label="${esc(HB[c]||'')}"><ellipse cx="7" cy="10" rx="6" ry="9" fill="${hbFill(c)}" stroke="var(--ink)" stroke-width="1.3"/></svg>`;}
+function elFill(l){return l==2?'var(--ink)':l==1?'color-mix(in srgb,var(--ink) 40%,var(--panel))':'var(--panel)';}
+function elIcon(el,sz){sz=sz||22;const L=(el||'000').split('').map(Number);return `<svg width="${sz*1.25}" height="${sz}" viewBox="0 0 40 32" role="img" aria-label="ความสูง"><g clip-path="url(#mtclip)"><rect x="0" y="0" width="40" height="14" fill="${elFill(L[0])}"/><rect x="0" y="14" width="40" height="8" fill="${elFill(L[1])}"/><rect x="0" y="22" width="40" height="10" fill="${elFill(L[2])}"/></g><path d="M2 31 L16 7 L19.5 12 L25 3 L38 31 Z M8.6 20 H32 M5 25.3 H35" fill="none" stroke="var(--ink)" stroke-width="1.4" stroke-linejoin="round"/></svg>`;}
+function elTxt(el){if(!el)return '';const L=el.split('').map(Number);const a=[],b=[];L.forEach((l,i)=>{if(l===2)a.push(ELN[i]);else if(l===1)b.push(ELN[i]);});return `${a.length?'<b>'+a.join(', ')+'</b>':''}${b.length?` <span class="muted">(ส่วนน้อย: ${b.join(', ')})</span>`:''}`||'<span class="muted">—</span>';}
+function habBox(s){
+  if(!s.hb&&!s.el) return '';
+  return `<div class="box"><h3>สภาพพื้นที่และความสูงจากระดับน้ำทะเล</h3>
+  <div style="display:flex;gap:18px;align-items:center;flex-wrap:wrap">
+   ${s.hb?`<span class="hab">${hbIcon(s.hb,28)}<span>ความชื้น: <b>${esc(HB[s.hb])}</b></span></span>`:''}
+   ${s.el?`<span class="hab">${elIcon(s.el,30)}<span>ความสูง: ${elTxt(s.el)}</span></span>`:''}
+  </div>
+  <p class="note">อ่านจากสัญลักษณ์ในหนังสือโดยอัตโนมัติ (วงรี = ระดับความชื้นของพื้นที่, ภูเขา 3 ชั้น = ช่วงความสูง; สีเข้ม = ส่วนใหญ่, สีเทา = ส่วนน้อย)</p></div>`;
+}
+function icMini(s){return (s.hb||s.el)?`<span class="ic">${s.hb?hbIcon(s.hb,15):''}${s.el?elIcon(s.el,15):''}</span>`:'';}
 
 // ---------- phenology
 const MTH=['ม.ค.','ก.พ.','มี.ค.','เม.ย.','พ.ค.','มิ.ย.','ก.ค.','ส.ค.','ก.ย.','ต.ค.','พ.ย.','ธ.ค.'];
@@ -445,7 +483,7 @@ document.addEventListener('mousemove',e=>{
   tip.innerHTML=`<b>${MTHF[i]}</b> · ${esc(s.t[0]||s.s)}<br>ออกดอก: ${L[f]}<br>ออกผล: ${L[fr]}`;
   tip.style.display='block';tip.style.left=Math.min(innerWidth-270,e.clientX+14)+'px';tip.style.top=(e.clientY+16)+'px';
 });
-function prow(s){return `<a class="prow" href="#/sp/${s.n}"><div class="nm"><span class="num">${s.n}</span>${esc(s.t[0]||'')} <span class="sci">${esc(s.s)}</span></div>${pbar(s)}</a>`;}
+function prow(s){return `<a class="prow" href="#/sp/${s.n}"><div class="nm"><span class="num">${s.n}</span>${icMini(s)}${esc(s.t[0]||'')} <span class="sci">${esc(s.s)}</span></div>${pbar(s)}</a>`;}
 function firstM(s,k){for(let i=0;i<12;i++)if(lv(s,k,i))return i;return 99;}
 function monthChart(list){
   const cf=Array(12).fill(0),cr=Array(12).fill(0);
@@ -480,46 +518,72 @@ function viewPhen(){
   $('#pq').oninput=e=>{PSTATE.q=e.target.value;draw()};
   draw();
 }
-let SSTATE={m:new Set(),type:'fl',lvl:1,mode:'any'};
+let SSTATE={m:new Set(),type:'fl',lvl:1,mode:'any',hb:new Set(),el:new Set(),view:'bars'};
 function viewSeason(qs){
   setTab('season');
-  if(qs&&qs.get('m')){SSTATE.m=new Set(qs.get('m').split(',').map(x=>+x-1).filter(x=>x>=0&&x<12));}
-  if(qs&&qs.get('t'))SSTATE.type=qs.get('t');
+  if(qs){
+    if(qs.get('m')) SSTATE.m=new Set(qs.get('m').split(',').map(x=>+x-1).filter(x=>x>=0&&x<12));
+    if(qs.get('t')) SSTATE.type=qs.get('t');
+    if(qs.get('hb')) SSTATE.hb=new Set(qs.get('hb').split(',').filter(x=>HB[x]));
+    if(qs.get('el')) SSTATE.el=new Set(qs.get('el').split(',').map(Number).filter(x=>x>=0&&x<3));
+  }
   const now=new Date().getMonth();
-  app.innerHTML=`<h2>ค้นหาตามช่วงเวลาออกดอก-ออกผล</h2>
-  <p class="muted">เลือกเดือน (เลือกได้หลายเดือน) แล้วเลือกว่าต้องการต้นไม้ที่ออกดอก ออกผล หรือทั้งสองอย่าง</p>
-  <div class="mpick" id="mp">${MTH.map((m,i)=>`<button data-i="${i}" class="${SSTATE.m.has(i)?'on':''}" title="${MTHF[i]}">${m}</button>`).join('')}</div>
+  const POOL=SP.filter(s=>s.fl||s.fr||s.hb||s.el);
+  app.innerHTML=`<h2>ค้นหาตามช่วงเวลาและถิ่นที่อยู่</h2>
+  <p class="muted">เลือกเงื่อนไขอย่างน้อยหนึ่งกลุ่ม · ภายในกลุ่มเดียวกันเลือกได้หลายค่า (ตรงค่าใดค่าหนึ่ง) · ต่างกลุ่มต้องตรงทุกกลุ่ม</p>
+  <div class="fgroup"><h4>1. ช่วงเวลาออกดอก-ออกผล</h4>
+  <div class="mpick" id="mp">${MTH.map((m,i)=>`<button data-i="${i}" title="${MTHF[i]}">${m}</button>`).join('')}</div>
   <div class="ctl">
     <span class="seg" id="ty"><button data-v="fl">ออกดอก</button><button data-v="fr">ออกผล</button><button data-v="both">ดอกหรือผล</button><button data-v="and">ทั้งดอกและผล</button></span>
-    <span class="seg" id="lv"><button data-v="1">รวมส่วนน้อย</button><button data-v="2">เฉพาะส่วนใหญ่</button></span>
     <span class="seg" id="md"><button data-v="any">เดือนใดเดือนหนึ่ง</button><button data-v="all">ครบทุกเดือนที่เลือก</button></span>
-    <button class="btn" id="now">เดือนนี้ (${MTH[now]})</button><button class="btn" id="clr">ล้าง</button>
+    <button class="btn" id="now">เดือนนี้ (${MTH[now]})</button>
+  </div></div>
+  <div class="fgroup"><h4>2. สภาพพื้นที่ (ระดับความชื้น)</h4>
+  <div class="chk" id="hbf">${HBORD.map(c=>`<button data-v="${c}">${hbIcon(c,18)}${esc(HB[c])}</button>`).join('')}</div></div>
+  <div class="fgroup"><h4>3. ความสูงจากระดับน้ำทะเล</h4>
+  <div class="chk" id="elf">${[0,1,2].map(i=>`<button data-v="${i}">${elIcon(['200','020','002'][i],18)}${ELN[i]}</button>`).join('')}</div></div>
+  <div class="ctl" style="margin-top:6px">
+    <span class="seg" id="lv"><button data-v="1">รวมส่วนน้อย</button><button data-v="2">เฉพาะส่วนใหญ่</button></span>
+    <button class="btn" id="clr">ล้างเงื่อนไขทั้งหมด</button>
     <span class="seg" id="vw"><button data-v="bars">แถบ</button><button data-v="cards">ภาพ</button></span>
   </div>
   ${legendHTML()}
   <div id="sres"></div>`;
-  const mark=()=>{['ty','lv','md','vw'].forEach(id=>{const v={ty:SSTATE.type,lv:String(SSTATE.lvl),md:SSTATE.mode,vw:SSTATE.view||'bars'}[id];document.querySelectorAll('#'+id+' button').forEach(b=>b.classList.toggle('on',b.dataset.v===v));});document.querySelectorAll('#mp button').forEach(b=>b.classList.toggle('on',SSTATE.m.has(+b.dataset.i)));};
+  const mark=()=>{
+    const cur={ty:SSTATE.type,lv:String(SSTATE.lvl),md:SSTATE.mode,vw:SSTATE.view};
+    ['ty','lv','md','vw'].forEach(id=>document.querySelectorAll('#'+id+' button').forEach(b=>b.classList.toggle('on',b.dataset.v===cur[id])));
+    document.querySelectorAll('#mp button').forEach(b=>b.classList.toggle('on',SSTATE.m.has(+b.dataset.i)));
+    document.querySelectorAll('#hbf button').forEach(b=>b.classList.toggle('on',SSTATE.hb.has(b.dataset.v)));
+    document.querySelectorAll('#elf button').forEach(b=>b.classList.toggle('on',SSTATE.el.has(+b.dataset.v)));
+  };
   const hit=(s,i)=>{const f=lv(s,'fl',i)>=SSTATE.lvl,r=lv(s,'fr',i)>=SSTATE.lvl;return SSTATE.type==='fl'?f:SSTATE.type==='fr'?r:SSTATE.type==='and'?(f&&r):(f||r);};
+  const elOk=s=>{if(!s.el)return false;return [...SSTATE.el].some(i=>+s.el[i]>=SSTATE.lvl);};
   const draw=()=>{
     mark();
-    const ms=[...SSTATE.m].sort((a,b)=>a-b);
-    const out=$('#sres');
-    if(!ms.length){out.innerHTML='<div class="empty">เลือกเดือนอย่างน้อย 1 เดือน</div>';return;}
-    const L=PH.filter(s=>SSTATE.mode==='all'?ms.every(i=>hit(s,i)):ms.some(i=>hit(s,i))).sort((a,b)=>num(a.n)-num(b.n));
+    const ms=[...SSTATE.m].sort((a,b)=>a-b), out=$('#sres');
+    if(!ms.length&&!SSTATE.hb.size&&!SSTATE.el.size){out.innerHTML='<div class="empty">เลือกเดือน สภาพพื้นที่ หรือช่วงความสูงอย่างน้อย 1 อย่าง</div>';return;}
+    const L=POOL.filter(s=>(!ms.length||(SSTATE.mode==='all'?ms.every(i=>hit(s,i)):ms.some(i=>hit(s,i))))
+      &&(!SSTATE.hb.size||SSTATE.hb.has(s.hb))&&(!SSTATE.el.size||elOk(s))).sort((a,b)=>num(a.n)-num(b.n));
     const tl={fl:'ออกดอก',fr:'ออกผล',both:'ออกดอกหรือออกผล',and:'ออกทั้งดอกและผล'}[SSTATE.type];
-    const head=`<p><b>${L.length}</b> ชนิดที่${tl}ใน${SSTATE.mode==='all'&&ms.length>1?'ทุกเดือน: ':''}${ms.map(i=>MTHF[i]).join(SSTATE.mode==='all'?' และ ':' หรือ ')}${SSTATE.lvl===2?' (เฉพาะช่วงที่พบส่วนใหญ่)':''}</p>`;
+    const parts=[];
+    if(ms.length) parts.push(`${tl}ใน${SSTATE.mode==='all'&&ms.length>1?'ทุกเดือน ':''}${ms.map(i=>MTHF[i]).join(SSTATE.mode==='all'?' และ ':' หรือ ')}`);
+    if(SSTATE.hb.size) parts.push('พื้นที่ '+[...SSTATE.hb].map(c=>HB[c]).join(' หรือ '));
+    if(SSTATE.el.size) parts.push('ความสูง '+[...SSTATE.el].sort().map(i=>ELN[i]).join(' หรือ '));
+    const head=`<p><b>${L.length}</b> ชนิด · ${parts.join(' · ')}${SSTATE.lvl===2?' (เฉพาะที่พบส่วนใหญ่)':''}</p>`;
     if(!L.length){out.innerHTML=head+'<div class="empty">ไม่พบชนิดที่ตรงเงื่อนไข</div>';return;}
-    out.innerHTML=head+((SSTATE.view==='cards')?`<div class="grid">${L.map(s=>card(s,mkHL('')).replace('</div></a>',`</div><div style="padding:0 11px 10px">${pbar(s)}</div></a>`)).join('')}</div>`
+    out.innerHTML=head+((SSTATE.view==='cards')?`<div class="grid">${L.map(s=>card(s,mkHL('')).replace('</div></a>',`</div><div style="padding:0 11px 10px">${icMini(s)}${pbar(s)}</div></a>`)).join('')}</div>`
       :`<div class="ptable"><div class="prow head"><div class="nm muted">${L.length} ชนิด</div><div class="months">${MTH.map((m,i)=>`<span style="${SSTATE.m.has(i)?'color:var(--ink);font-weight:700':''}">${m}</span>`).join('')}</div></div>${L.map(prow).join('')}</div>`);
   };
-  const sync=()=>{const ms=[...SSTATE.m].sort((a,b)=>a-b).map(i=>i+1).join(',');history.replaceState(null,'','#/season'+(ms?`?m=${ms}&t=${SSTATE.type}`:''));draw();};
+  const sync=()=>{const q=[];const ms=[...SSTATE.m].sort((a,b)=>a-b).map(i=>i+1).join(',');if(ms)q.push('m='+ms,'t='+SSTATE.type);if(SSTATE.hb.size)q.push('hb='+[...SSTATE.hb].join(','));if(SSTATE.el.size)q.push('el='+[...SSTATE.el].join(','));history.replaceState(null,'','#/season'+(q.length?'?'+q.join('&'):''));draw();};
   document.querySelectorAll('#mp button').forEach(b=>b.onclick=()=>{const i=+b.dataset.i;SSTATE.m.has(i)?SSTATE.m.delete(i):SSTATE.m.add(i);sync();});
+  document.querySelectorAll('#hbf button').forEach(b=>b.onclick=()=>{const v=b.dataset.v;SSTATE.hb.has(v)?SSTATE.hb.delete(v):SSTATE.hb.add(v);sync();});
+  document.querySelectorAll('#elf button').forEach(b=>b.onclick=()=>{const v=+b.dataset.v;SSTATE.el.has(v)?SSTATE.el.delete(v):SSTATE.el.add(v);sync();});
   document.querySelectorAll('#ty button').forEach(b=>b.onclick=()=>{SSTATE.type=b.dataset.v;sync();});
   document.querySelectorAll('#lv button').forEach(b=>b.onclick=()=>{SSTATE.lvl=+b.dataset.v;draw();});
   document.querySelectorAll('#md button').forEach(b=>b.onclick=()=>{SSTATE.mode=b.dataset.v;draw();});
   document.querySelectorAll('#vw button').forEach(b=>b.onclick=()=>{SSTATE.view=b.dataset.v;draw();});
   $('#now').onclick=()=>{SSTATE.m=new Set([now]);sync();};
-  $('#clr').onclick=()=>{SSTATE.m=new Set();sync();};
+  $('#clr').onclick=()=>{SSTATE.m=new Set();SSTATE.hb=new Set();SSTATE.el=new Set();sync();};
   draw();
 }
 function phenBox(s){
